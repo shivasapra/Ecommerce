@@ -36,6 +36,7 @@ Route::post('/client/update/{id}', 'ClientController@update')->name('client.upda
 Route::get('/client/view/{id}', 'ClientController@show')->name('client.view');
 Route::get('/client/delete/{id}', 'ClientController@destroy')->name('client.delete');
 
+
 Route::get('/employees', 'EmployeeController@index')->name('employees');
 Route::get('/employee/create', 'EmployeeController@create')->name('employee.create');
 Route::post('/employee/store', 'EmployeeController@store')->name('employee.store');
@@ -43,3 +44,12 @@ Route::get('/employee/edit/{id}', 'EmployeeController@edit')->name('employee.edi
 Route::post('/employee/update/{id}', 'EmployeeController@update')->name('employee.update');
 Route::get('/employee/view/{id}', 'EmployeeController@show')->name('employee.view');
 Route::get('/employee/delete/{id}', 'EmployeeController@destroy')->name('employee.delete');
+
+
+Route::get('/categories', 'CategoryController@index')->name('categories');
+Route::get('/category/create', 'CategoryController@create')->name('category.create');
+Route::post('/category/store', 'CategoryController@store')->name('category.store');
+Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit');
+Route::post('/category/update/{id}', 'CategoryController@update')->name('category.update');
+Route::get('/category/view/{id}', 'CategoryController@show')->name('category.view');
+Route::get('/category/delete/{id}', 'CategoryController@destroy')->name('category.delete');
