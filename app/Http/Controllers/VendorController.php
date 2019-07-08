@@ -93,9 +93,7 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {   
 
-        Validator::make($request->all(), [
-            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
-            ])->validate();
+       
 
 
         $vendor = Vendor::find($id);

@@ -94,10 +94,7 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {   
 
-        Validator::make($request->all(), [
-            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
-            ])->validate();
-
+        
         $employww = Employee::find($id);
         $employww->name = $request->name;
         $employww->email = $request->email;
