@@ -31,7 +31,11 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>
+                                        @if(!Auth::user()->admin)
                                         <a href="{{route('category.products',['id'=>$category->id])}}">{{$category->name}}</a>
+                                        @else
+                                        {{$category->name}}
+                                        @endif
                                     </td>
                                     <td>
                                         {{-- <a href="{{route('client.view',['id'=>$client->id])}}" class="btn btn-sm btn-primary">View</a> --}}

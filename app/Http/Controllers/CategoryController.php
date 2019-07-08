@@ -105,6 +105,7 @@ class CategoryController extends Controller
 
     public function products($id){
         $products = Category::find($id)->products;
+        // dd($products);
         return view('category.products')->with('products',$products);
     }
 }

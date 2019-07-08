@@ -34,17 +34,17 @@
                                 @if($products->count()>0)
                                 <?php $i  = 1; ?>
                                     @foreach($products as $product)
+                                    <form action="{{route('product.save',['id'=>$product->id])}}" method="post">
+                                            @csrf
                                     <tr>
                                         <th>{{$i++}}.</th>
                                         <td>
-                                                <img src="{{$product->img}}" alt="" style="height:150px; width:150px;">
+                                                <img src="{{asset($product->img)}}" alt="" style="height:150px; width:150px;">
                                             </td>
                                         <td>
                                             {{$product->category->name}}
                                         </td>
                                         <td>{{$product->name}}</td>
-                                    <form action="{{route('product.save',['id'=>$product->id])}}" method="post">
-                                            @csrf
                                         <td>
                                             <input type="text" name="quantity" class="form-control">
                                         </td>
@@ -56,8 +56,8 @@
                                             <button type="submit" class="btn btn-sm btn-success">Save</button>
                                         </td>
                                         @endif
-                                    </form>
                                     </tr>
+                                </form>
                                     @endforeach
                                 @endif
                             </tbody>

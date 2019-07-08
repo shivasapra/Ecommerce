@@ -37,7 +37,7 @@
                                     <tr>
                                         <th>{{$i++}}.</th>
                                         <td>
-                                            <img src="{{$product->img}}" alt="" style="height:150px; width:150px;">
+                                            <img src="{{asset($product->img)}}" alt="" style="height:150px; width:150px;">
                                         </td>
                                         <td>
                                             {{$product->category->name}}
@@ -64,7 +64,7 @@
                                                 --
                                             @endif
                                         </td>
-                                        @if(Auth::user()->admin)
+                                        @if(Auth::user()->admin and $product->vendor_id == null)
                                         <td>
                                             <a href="{{route('product.edit',['id'=>$product->id])}}" class="btn btn-sm btn-success">Edit</a>
                                             <a href="{{route('product.delete',['id'=>$product->id])}}" class="btn btn-sm btn-danger">Delete</a>
