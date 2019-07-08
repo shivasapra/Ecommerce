@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
+use App\User;
 
 class EmployeeController extends Controller
 {   
@@ -17,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employee.index')->with('employees',App\Employee::all());
+        return view('employee.index')->with('employees',Employee::all());
     }
 
     /**
@@ -38,12 +40,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = new App\Employee;
+        $employee = new Employee;
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->save();
 
-        $user = new App\User;
+        $user = new User;
         $user->name = $employee->name;
         $user->email = $employee->email;
         $user->password = bcrypt('pass@123');
@@ -60,7 +62,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = App\Employee::find($id);
+        $employee = Employee::find($id);
         return view('employee.show')->with('employee',$employee);
     }
 
@@ -72,7 +74,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = App\Employee::find($id);
+        $employee = Employee::find($id);
         return view('employee.edit')->with('employee',$employee);
     }
 
@@ -85,7 +87,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employww = App\Employee::find($id);
+        $employww = Employee::find($id);
         $employww->name = $request->name;
         $employww->email = $request->email;
         $employww->save();
@@ -101,7 +103,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        App\Employee::find($id)->delete();
+        Employee::find($id)->delete();
         return redirect()->back();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Vendor;
+use App\User;
 
 class VendorController extends Controller
 {   
@@ -18,7 +19,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        return view('vendor.index')->with('vendors',App\Vendor::all());
+        return view('vendor.index')->with('vendors',Vendor::all());
     }
 
     /**
@@ -39,12 +40,12 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        $vendor = new App\Vendor;
+        $vendor = new Vendor;
         $vendor->name = $request->name;
         $vendor->email = $request->email;
         $vendor->save();
 
-        $user = new App\User;
+        $user = new User;
         $user->name = $vendor->name;
         $user->email = $vendor->email;
         $user->password = bcrypt('pass@123');
@@ -61,7 +62,7 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        $vendor = App\Vendor::find($id);
+        $vendor = Vendor::find($id);
         return view('vendor.show')->with('vendor',$vendor);
     }
 
@@ -73,7 +74,7 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        $vendor = App\Vendor::find($id);
+        $vendor = Vendor::find($id);
         return view('vendor.edit')->with('vendor',$vendor);
     }
 
@@ -86,7 +87,7 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $vendor = App\Vendor::find($id);
+        $vendor = Vendor::find($id);
         $vendor->name = $request->name;
         $vendor->email = $request->email;
         $vendor->save();
@@ -102,7 +103,7 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        App\Vendor::find($id)->delete();
+        Vendor::find($id)->delete();
         return redirect()->back();
     }
 }

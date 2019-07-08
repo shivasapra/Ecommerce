@@ -71,9 +71,26 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">Navigation</div>
+            
+                            <div class="card-body">
+                                <ul>
+                                    <li><a href="{{route('home')}}">Dashboard</a></li>
+                                    <li><a href="{{route('clients')}}">Clients</a></li>
+                                    <li><a href="{{route('employees')}}">Employees</a></li>
+                                    <li><a href="{{route('vendors')}}">vendors</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @yield('content')
+                </div>
+            </div>
         </main>
     </div>
 </body>
