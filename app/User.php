@@ -46,6 +46,6 @@ class User extends Authenticatable
     }
 
     public function vendor(){
-        return $this->hasMany('App\Vendor');
+        return $this->hasOne('App\Vendor');
     }
 }

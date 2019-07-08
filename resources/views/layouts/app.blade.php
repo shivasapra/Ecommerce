@@ -81,11 +81,10 @@
                             <div class="card-body">
                                 <ul>
                                     <li><a href="{{route('home')}}">Dashboard</a></li>
-                                    @if(Auth::user()->admin)
                                         <li><a href="{{route('clients')}}">Clients</a></li>
                                         <li><a href="{{route('employees')}}">Employees</a></li>
-                                        <li><a href="{{route('vendors')}}">vendors</a></li>
-                                        @endif
+                                        <li><a href="{{route('vendors')}}">Vendors</a></li>
+                                        <li><a href="{{route('products')}}">Products</a></li>
                                         <li><a href="{{route('categories')}}">Categories</a></li>
                                 </ul>
                             </div>

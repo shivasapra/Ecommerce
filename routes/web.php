@@ -53,3 +53,14 @@ Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edi
 Route::post('/category/update/{id}', 'CategoryController@update')->name('category.update');
 Route::get('/category/view/{id}', 'CategoryController@show')->name('category.view');
 Route::get('/category/delete/{id}', 'CategoryController@destroy')->name('category.delete');
+Route::get('/category/products/{id}', 'CategoryController@products')->name('category.products');
+
+
+Route::get('/products', 'ProductController@index')->name('products');
+Route::get('/product/create', 'ProductController@create')->name('product.create');
+Route::post('/product/store', 'ProductController@store')->name('product.store');
+Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
+Route::post('/product/update/{id}', 'ProductController@update')->name('product.update');
+Route::get('/product/view/{id}', 'ProductController@show')->name('product.view');
+Route::get('/product/delete/{id}', 'ProductController@destroy')->name('product.delete');
+Route::post('/product/save/{id}', 'ProductController@save')->name('product.save');

@@ -30,7 +30,9 @@
                                 @foreach($categories as $category)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$category->name}}</td>
+                                    <td>
+                                        <a href="{{route('category.products',['id'=>$category->id])}}">{{$category->name}}</a>
+                                    </td>
                                     <td>
                                         {{-- <a href="{{route('client.view',['id'=>$client->id])}}" class="btn btn-sm btn-primary">View</a> --}}
                                         <a href="{{route('category.edit',['id'=>$category->id])}}" class="btn btn-sm btn-success">Edit</a>

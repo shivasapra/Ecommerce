@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Product;
 use App\Category;
+use Auth;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     public function __construct()
     {
@@ -17,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index')->with('categories',Category::all());
+        return view('product.index')->with('products',Product::all());
     }
 
     /**
@@ -27,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('product.create')->with('categories',Category::all());
     }
 
     /**
@@ -38,14 +40,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {   
+        $category = Category::find($request->category);
+        $product = new Product;
+        $product->category_id = $category->id;
+        $product->name = $request->name;
+
+        $img = $request->img;
+        $img_new_name = time().$img->getClientOriginalName();
+        $img->move('uploads/',$img_new_name);
+        $product->img = 'uploads/'.$img_new_name;
+        $product->save();
 
 
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-
-
-        return redirect()->route('categories');
+        return redirect()->route('products');
     }
 
     /**
@@ -56,8 +63,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-        return view('category.show')->with('category',$category);
+        $products = Product::find($id);
+        return view('product.show')->with('product',$products);
     }
 
     /**
@@ -68,8 +75,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('category.edit')->with('category',$category);
+        $products = Product::find($id);
+        return view('product.edit')->with('product',$products);
     }
 
     /**
@@ -83,11 +90,16 @@ class CategoryController extends Controller
     {   
 
         
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->save();
+        $product = Product::find($id);
+        $product->name = $request->name;
 
-        return redirect()->route('categories');
+        $img = $request->img;
+        $img_new_name = time().$img->getClientOriginalName();
+        $img->move('uploads/',$img_new_name);
+        $product->img = 'uploads/'.$img_new_name;
+        $product->save();
+
+        return redirect()->route('products');
     }
 
     /**
@@ -99,12 +111,17 @@ class CategoryController extends Controller
     public function destroy($id)
     {   
         
-        Category::find($id)->delete();
+        Product::find($id)->delete();
         return redirect()->back();
     }
 
-    public function products($id){
-        $products = Category::find($id)->products;
-        return view('category.products')->with('products',$products);
+    public function save(Request $request,$id){
+        $product = Product::find($id);
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->vendor_id = Auth::user()->vendor->id;
+        $product->save();
+
+        return redirect()->back();
     }
 }
