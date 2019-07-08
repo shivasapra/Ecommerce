@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Employee;
 use App\User;
-
+use Validator;
 class EmployeeController extends Controller
 {   
     public function __construct()
@@ -39,7 +39,13 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
+
         $employee = new Employee;
         $employee->name = $request->name;
         $employee->email = $request->email;
@@ -86,7 +92,12 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
         $employww = Employee::find($id);
         $employww->name = $request->name;
         $employww->email = $request->email;

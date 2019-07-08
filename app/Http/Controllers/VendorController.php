@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Vendor;
 use App\User;
-
+use Validator;
 class VendorController extends Controller
 {   
     public function __construct()
@@ -39,7 +39,12 @@ class VendorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
+
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
         $vendor = new Vendor;
         $vendor->name = $request->name;
         $vendor->email = $request->email;
@@ -86,7 +91,13 @@ class VendorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
+
         $vendor = Vendor::find($id);
         $vendor->name = $request->name;
         $vendor->email = $request->email;

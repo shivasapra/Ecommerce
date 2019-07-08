@@ -34,9 +34,9 @@
                                     <td>{{$employee->name}}</td>
                                     <td>{{$employee->email}}</td>
                                     <td>
-                                        <a href="{{route('employee.view',['id'=>$employee->id])}}" class="btn btn-xs btn-info">View</a>
-                                        <a href="{{route('employee.edit',['id'=>$employee->id])}}" class="btn btn-xs btn-success">Edit</a>
-                                        <a href="{{route('employee.delete',['id'=>$employee->id])}}" class="btn btn-xs btn-danger">Delete</a>
+                                        <a href="{{route('employee.view',['id'=>$employee->id])}}" class="btn btn-sm btn-primary">View</a>
+                                        <a href="{{route('employee.edit',['id'=>$employee->id])}}" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{{route('employee.delete',['id'=>$employee->id])}}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

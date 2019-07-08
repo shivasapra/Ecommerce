@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\User;
+use Validator;
 class ClientController extends Controller
 {   
     public function __construct()
@@ -38,7 +39,12 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
+
         $client = new Client;
         $client->name = $request->name;
         $client->email = $request->email;
@@ -85,7 +91,13 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+        Validator::make($request->all(), [
+            'email' => 'unique:users|unique:employees|unique:clients|unique:vendors'
+            ])->validate();
+
+            
         $client = Client::find($id);
         $client->name = $request->name;
         $client->email = $request->email;
