@@ -13,7 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('client.index')->with('clients',App\Client::all());
     }
 
     /**
@@ -23,7 +23,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.create');
     }
 
     /**
@@ -34,7 +34,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new App\Client;
+        $client->name = $request->name;
+        $client->email = $request->email;
+        $client->save();
+
+        $user = new App\User;
+        $user->name = $client->name;
+        $user->email = $client->email;
+        $user->password = bcrypt('pass@123');
+        $user->save();
+
+        return redirect()->route('clients');
     }
 
     /**
@@ -45,7 +56,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = App\Client::find($id);
+        return view('client.show')->with('client',$client);
     }
 
     /**
@@ -56,7 +68,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = App\Client::find($id);
+        return view('client.edit')->with('client',$client);
     }
 
     /**
@@ -68,7 +81,12 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = App\Client::find($id);
+        $client->name = $request->name;
+        $client->email = $request->email;
+        $client->save();
+
+        return redirect()->route('clients');
     }
 
     /**
@@ -79,6 +97,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        App\Client::find($id)->delete();
+        return redirect()->back();
     }
 }

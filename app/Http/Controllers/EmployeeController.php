@@ -13,7 +13,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('employee.index')->with('employees',App\Employee::all());
     }
 
     /**
@@ -23,7 +23,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
@@ -34,7 +34,18 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new App\Employee;
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->save();
+
+        $user = new App\User;
+        $user->name = $employee->name;
+        $user->email = $employee->email;
+        $user->password = bcrypt('pass@123');
+        $user->save();
+
+        return redirect()->route('employees');
     }
 
     /**
@@ -45,7 +56,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = App\Employee::find($id);
+        return view('employee.show')->with('employee',$employee);
     }
 
     /**
@@ -56,7 +68,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = App\Employee::find($id);
+        return view('employee.edit')->with('employee',$employee);
     }
 
     /**
@@ -68,7 +81,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employww = App\Employee::find($id);
+        $employww->name = $request->name;
+        $employww->email = $request->email;
+        $employww->save();
+
+        return redirect()->route('employees');
     }
 
     /**
@@ -79,6 +97,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        App\Employee::find($id)->delete();
+        return redirect()->back();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Vendor;
 
 class VendorController extends Controller
 {
@@ -13,7 +14,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        return view('vendor.index')->with('vendors',App\Vendor::all());
     }
 
     /**
@@ -23,7 +24,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendor.create');
     }
 
     /**
@@ -34,7 +35,18 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vendor = new App\Vendor;
+        $vendor->name = $request->name;
+        $vendor->email = $request->email;
+        $vendor->save();
+
+        $user = new App\User;
+        $user->name = $vendor->name;
+        $user->email = $vendor->email;
+        $user->password = bcrypt('pass@123');
+        $user->save();
+
+        return redirect()->route('vendors');
     }
 
     /**
@@ -45,7 +57,8 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        //
+        $vendor = App\Vendor::find($id);
+        return view('vendor.show')->with('vendor',$vendor);
     }
 
     /**
@@ -56,7 +69,8 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vendor = App\Vendor::find($id);
+        return view('vendor.edit')->with('vendor',$vendor);
     }
 
     /**
@@ -68,7 +82,12 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vendor = App\Vendor::find($id);
+        $vendor->name = $request->name;
+        $vendor->email = $request->email;
+        $vendor->save();
+
+        return redirect()->route('vendors');
     }
 
     /**
@@ -79,6 +98,7 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        App\Vendor::find($id)->delete();
+        return redirect()->back();
     }
 }
