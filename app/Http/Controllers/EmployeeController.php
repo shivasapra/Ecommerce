@@ -57,6 +57,10 @@ class EmployeeController extends Controller
         $user->password = bcrypt('pass@123');
         $user->save();
 
+        $employee->user_id = $user->id;
+        $employee->save();
+
+
         return redirect()->route('employees');
     }
 
@@ -110,7 +114,8 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        Employee::find($id)->user()->delete();
         Employee::find($id)->delete();
         return redirect()->back();
     }

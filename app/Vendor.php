@@ -9,6 +9,6 @@ class Vendor extends Model
     protected $fillable = ['vendors'];
 
     public function user(){
-        $this->belongsTo('App\Vendor');
+        return $this->belongsTo('App\Vendor');
     }
 }

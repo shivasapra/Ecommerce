@@ -56,6 +56,9 @@ class VendorController extends Controller
         $user->password = bcrypt('pass@123');
         $user->save();
 
+        $vendor->user_id = $user->id;
+        $vendor->save();
+
         return redirect()->route('vendors');
     }
 
@@ -111,7 +114,8 @@ class VendorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        Vendor::find($id)->user->delete();
         Vendor::find($id)->delete();
         return redirect()->back();
     }

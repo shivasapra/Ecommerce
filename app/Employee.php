@@ -9,6 +9,6 @@ class Employee extends Model
     protected $fillable = ['employees'];
 
     public function user(){
-        $this->belongsTo('App\Employee');
+        return $this->belongsTo('App\Employee');
     }
 }

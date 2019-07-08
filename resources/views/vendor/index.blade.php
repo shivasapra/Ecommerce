@@ -34,7 +34,7 @@
                                     <td>{{$vendor->name}}</td>
                                     <td>{{$vendor->email}}</td>
                                     <td>
-                                        <a href="{{route('vendor.view',['id'=>$vendor->id])}}" class="btn btn-sm btn-primary">View</a>
+                                        {{-- <a href="{{route('vendor.view',['id'=>$vendor->id])}}" class="btn btn-sm btn-primary">View</a> --}}
                                         <a href="{{route('vendor.edit',['id'=>$vendor->id])}}" class="btn btn-sm btn-success">Edit</a>
                                         <a href="{{route('vendor.delete',['id'=>$vendor->id])}}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>

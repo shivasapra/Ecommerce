@@ -56,6 +56,9 @@ class ClientController extends Controller
         $user->password = bcrypt('pass@123');
         $user->save();
 
+        $client->user_id = $user->id;
+        $client->save();
+
         return redirect()->route('clients');
     }
 
@@ -109,7 +112,8 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        Client::find($id)->user->delete();
         Client::find($id)->delete();
         return redirect()->back();
     }

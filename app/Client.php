@@ -10,6 +10,6 @@ class Client extends Model
     protected $fillable = ['clients'];
 
     public function user(){
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 }
